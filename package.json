@@ -1,17 +1,18 @@
 {
-   "name": "medium-get-user-details",
-   "version": "0.0.1",
-   "description": "Returns details of the user who has granted permission to the application",
-   "main": "index.js",
-   "author": "Run Dexter, Inc",
-   "license": "MIT",
-   "private": true,
-   "dependencies": {
-      "lodash": "^3.10.1",
-      "request": "^2.67.0"
-   },
-   "repository": {
-      "type": "git",
-      "url": "https://github.com/rundexter/medium-get-user-details"
-   }
+  "name": "medium-get-user-details",
+  "version": "0.0.2",
+  "description": "Returns details of the user who has granted permission to the application",
+  "main": "index.js",
+  "author": "Run Dexter, Inc",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "lodash": "^4",
+    "q": "^1.4.1",
+    "superagent": "^1.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rundexter/medium-get-user-details"
+  }
 }

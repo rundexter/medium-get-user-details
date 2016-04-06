@@ -5,28 +5,26 @@
     //Required. Inputs the module expects.
     "inputs": [],
     //Required. Outputs the module emits.
-    "outputs": [
-        {
-            "id": "id",
-            "title":"ID"
-        },
-        {
-            "id": "username",
-            "title":"Username"
-        },
-        {
-            "id": "name",
-            "title":"Name"
-        },
-        {
-            "id": "url",
-            "title":"URL"
-        },
-        {
-            "id": "imageUrl",
-            "title":"Image URL"
-        }
-    ],
+    "outputs": [{
+        "id": "id",
+        "title":"ID"
+    }, {
+        "id": "username",
+        "title":"Username"
+    }, {
+        "id": "name",
+        "title":"Name"
+    }, {
+        "id": "url",
+        "title":"URL"
+    }, {
+        "id": "imageUrl",
+        "title":"Image URL"
+    }],
+    "providers": [{
+      "name": "medium"
+      , "scopes": [ "basicProfile" ]
+    }],
     "icon": "medium",
     "title": "Medium: Get User Details"
 }

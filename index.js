@@ -1,15 +1,7 @@
-var util = require('./util.js');
-var request = require('request').defaults({
-    baseUrl: 'https://api.medium.com/'
-});
-
-var pickOutputs = {
-        'id': 'data.id',
-        'username': 'data.username',
-        'name': 'data.name',
-        'url': 'data.url',
-        'imageUrl': 'data.imageUrl'
-    };
+var _     = require('lodash')
+  , agent = require('superagent')
+  , q     = require('q')
+;
 
 module.exports = {
 
@@ -20,17 +12,24 @@ module.exports = {
      * @param {AppData} dexter Container for all data used in this workflow.
      */
     run: function(step, dexter) {
-        var token = dexter.environment('medium_access_token'),
-            api = '/v1/me';
+        var token = dexter.provider('medium').credentials('access_token')
+          , deferred = q.defer()
+        ;
 
-        if (!token)
-            return this.fail('A [medium_access_token] environment variable is required for this module');
+        agent.get('https://api.medium.com/v1/me')
+          .set('Authorization', 'Bearer '+token)
+          .type('json')
+          .end(deferred.makeNodeResolver())
+        ;
 
-        request.get({uri: api, auth: { bearer: token }, json: true}, function (error, response, body) {
-            if (error)
-                this.fail(error);
-            else
-                this.complete(util.pickOutputs(body, pickOutputs));
-        }.bind(this));
+        deferred
+          .promise
+          .then(function(result) {
+             console.log(result.body);
+             return _.get(result, 'body.data');
+           })
+           .then(this.complete.bind(this))
+           .catch(this.fail.bind(this))
+        ;  
     }
 };
